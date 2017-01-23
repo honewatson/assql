@@ -106,8 +106,8 @@ proc exec*(db: DbConn, query: string, params: varargs[string]): string =
     # db.exec(query.sql, params)
 
 
-macro parseAssql*(name: static[string]): stmt {.immediate.} =
-    var procs = name.slurp.parseAssqlProcs
+macro parseAssql*(name: NimNode): stmt {.immediate.} =
+    var procs = name.strVal.slurp.parseAssqlProcs
     result = newStmtList()
 
     for p in procs:
